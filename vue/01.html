@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Hello App！</h1>
+        <p>
+           <router-link to="/">首页</router-link>     
+           <router-link to="/student">会员管理</router-link>     
+           <router-link to="/teacher">讲师管理</router-link>     
+        </p>
+        <router-view></router-view>
+    </div>
+    <!-- vue和vue-router顺序不能变 -->
+    <script src="vue.min.js"></script>
+    <script src="vue-router.min.js"></script>
+    <script>
+        //1 定义显示内容
+        const Welcome = {template: '<div>首页数据...</div>'}
+        const Student = {template: '<div>会员管理数据...</div>'}
+        const Teacher = {template: '<div>讲师管理数据...</div>'}
+        //2 建立路由和内容之间关系
+        const routes = [
+            { path:'/',redirect: '/welcome' },
+            { path:'/welcome',component: Welcome },
+            { path:'/student',component: Student },
+            { path:'/teacher',component: Teacher }
+        ]
+        //3 路由实例化
+        const router = new VueRouter({
+            routes //（缩写）routes：routes
+        })
+        //路由在vue加载
+        let app = new  Vue({
+            el:'#app',
+            router
+        })
+    </script>
+</body>
+</html>
